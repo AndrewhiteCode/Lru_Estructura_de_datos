@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* -------- internal list helpers (O(1)) -------- */
 static void push_front(LRU *lru, Node *node) {
     node->prev = NULL;
     node->next = lru->head;
@@ -34,9 +33,9 @@ static Node *evict_tail(LRU *lru) {
     return victima;
 }
 
-/* -------- public API -------- */
+
 LRU *lru_create(int capacity) {
-    if (capacity < 5) capacity = 5; /* enforce minimum */
+    if (capacity < 5) capacity = 5; /*CAPACIDAD DE LA LISTA*/
     LRU *lru = (LRU*)calloc(1, sizeof(LRU));
     if (!lru) return NULL;
     lru->capacity = capacity;
@@ -73,7 +72,7 @@ int lru_search(LRU *lru, char key) {
     for (Node *it = lru->head; it; it = it->next, ++pos) {
         if (it == node) return pos;
     }
-    return -1; /* should not happen */
+    return -1; /* Si todo falla */
 }
 
 bool lru_add(LRU *lru, char key, char *evicted_key) {
@@ -82,12 +81,11 @@ bool lru_add(LRU *lru, char key, char *evicted_key) {
 
     Node *node = lru->index[key - 'A'];
     if (node) {
-        /* treat as "used": move to front */
         move_to_front(lru, node);
         return true;
     }
 
-    /* need new node */
+    /* nuevo nodo */
     if (lru->size == lru->capacity) {
         Node *victima = evict_tail(lru);
         if (victima) {
@@ -108,9 +106,9 @@ bool lru_add(LRU *lru, char key, char *evicted_key) {
 }
 
 void lru_print_all(const LRU *lru) {
-    printf("Cache contents: ");
+    printf("Contenido de la cache: ");
     if (!lru || lru->size == 0) {
-        printf("(empty)\n");
+        printf("(Vacio)\n");
         return;
     }
     const Node *it = lru->head;

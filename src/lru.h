@@ -17,4 +17,17 @@ typedef struct {
     Node *index[26];          /* index['A'..'Z'] -> Node* */
 } LRU;
 
+/* Constructor / destructor */
+LRU *lru_create(int capacity);
+void lru_free(LRU *lru);
+
+/* Funciones */
+bool lru_add(LRU *lru, char key, char *evicted_key);   
+bool lru_get(LRU *lru, char key);                      
+int  lru_search(LRU *lru, char key);                   
+void lru_print_all(const LRU *lru);                    
+
+/* Validadores */
+static inline bool is_upper_letter(char c) { return c >= 'A' && c <= 'Z'; }
+
 #endif /* LRU_H */
