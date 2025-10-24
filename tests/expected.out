@@ -1,0 +1,17 @@
+Cache created with size 5
+Data A added to cache
+Data B added to cache
+Data C added to cache
+Data element B used
+Data D added to cache
+Data E added to cache
+Cache contents: E - D - B - C - A
+Data element A deleted
+Data F added to cache
+Cache contents: F - E - D - B - C
+5
+-1
+Data element C deleted
+Data A added to cache
+Cache contents: A - F - E - D - B
+Bye!

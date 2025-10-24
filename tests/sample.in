@@ -1,0 +1,15 @@
+lru create 5
+lru add A
+lru add B
+lru add C
+lru get B
+lru add D
+lru add E
+lru all
+lru add F
+lru all
+lru search C
+lru search Z
+lru add A
+lru all
+lru exit
